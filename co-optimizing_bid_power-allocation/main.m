@@ -1,31 +1,34 @@
-%% Í¶±ê-¹¦ÂÊ·Ö½âÁªºÏÓÅ»¯Ö÷³ÌÐò
+%% Í¶ï¿½ï¿½-ï¿½ï¿½ï¿½Ê·Ö½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-M = 1e3; % ´óÊý
+M = 1e3; % ï¿½ï¿½ï¿½ï¿½
+root = fileparts(fileparts(mfilename("fullpath")));
+addpath(genpath(root));
+if ~exist("SOLVER_NAME", "var")
+    SOLVER_NAME = 'cplex';
+end
 
-% ×¼±¸²ÎÊý
-cd ../data_prepare
-data_prepare_main; % µ÷ÓÃÊý¾Ý×¼±¸º¯Êý
-cd ../co-optimizing_bid_power-allocation
+% ×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+run(fullfile(root, "data_prepare", "data_prepare_main.m")); % ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-% Í¶±ê¸üÐÂ²½³¤
-NOFTCAP = 900; % ¶ÔÓ¦30·ÖÖÓ
-P_alloc = []; % ÓÃÓÚ¼ÇÂ¼¹¦ÂÊ·ÖÅä½á¹û
-actualMil = zeros(NOFSLOTS, 1); % ¼ÇÂ¼Êµ¼Êµ÷ÆµÀï³Ì
-actualEnergy = zeros(NOFSLOTS, 1); % ¼ÇÂ¼Êµ¼ÊÓëµçÍø½»»»ÄÜÁ¿
-actualCost = zeros(NOFSLOTS, 1); % ¼ÇÂ¼Êµ¼ÊÀÏ»¯³É±¾
+% Í¶ï¿½ï¿½ï¿½ï¿½Â²ï¿½ï¿½ï¿½
+NOFTCAP = 900; % ï¿½ï¿½Ó¦30ï¿½ï¿½ï¿½ï¿½
+P_alloc = []; % ï¿½ï¿½ï¿½Ú¼ï¿½Â¼ï¿½ï¿½ï¿½Ê·ï¿½ï¿½ï¿½ï¿½ï¿½
+actualMil = zeros(NOFSLOTS, 1); % ï¿½ï¿½Â¼Êµï¿½Êµï¿½Æµï¿½ï¿½ï¿½
+actualEnergy = zeros(NOFSLOTS, 1); % ï¿½ï¿½Â¼Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+actualCost = zeros(NOFSLOTS, 1); % ï¿½ï¿½Â¼Êµï¿½ï¿½ï¿½Ï»ï¿½ï¿½É±ï¿½
 
-% ³õÊ¼Ê±¶Î
+% ï¿½ï¿½Ê¼Ê±ï¿½ï¿½
 warning('off')
 t_cap = 0;
-maxProfit_1; % ¼ÆËã³õÊ¼Ê±¶Î×î´óÀûÈó
+maxProfit_1; % ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-% ÖÐ¼äÊ±¶Î
+% ï¿½Ð¼ï¿½Ê±ï¿½ï¿½
 for t_cap = 1 : (NOFSLOTS - 1) * 1800
     
-    if mod(t_cap, 1800) == 0 % Ê±¶ÎÄ©Î²£¬¸üÐÂÏÂÒ»Ê±¶ÎÍ¶±ê£¬µ«³Ë×Ó²»¸üÐÂ
+    if mod(t_cap, 1800) == 0 % Ê±ï¿½ï¿½Ä©Î²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ê±ï¿½ï¿½Í¶ï¿½ê£¬ï¿½ï¿½ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½
         delta_t_rest = 0;
-        maxProfit_t; % ¼ÆËãÏÂÒ»Ê±¶Î×î´óÀûÈó
-        % ¼ÇÂ¼Ïà¹Ø½á¹û
+        maxProfit_t; % ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        % ï¿½ï¿½Â¼ï¿½ï¿½Ø½ï¿½ï¿½
         Bid_P_cur = value(Bid_P(1));
         Bid_R_cur = value(Bid_R(1));
         Bid_R_rev = [Bid_R_rev; value(Bid_R(1))];
@@ -33,31 +36,31 @@ for t_cap = 1 : (NOFSLOTS - 1) * 1800
         E_rev = [E_rev, E_cur];
         
     else
-        if mod(t_cap, 900) == 1 % Ê±¶Î³õ»òÖÐ¼ä³õ£¬¸üÐÂ³Ë×Ó²¢·ÖÅä¹¦ÂÊ£¬µ«²»¸üÐÂµ±Ç°Ê±¶ÎÍ¶±ê
-            delta_t_rest = delta_t - mod(t_cap - 1, 1800) / 1800; % µ±Ç°Ê±¶ÎÊ£ÓàÊ±¼ä
-            maxProfit_t; % ¼ÆËãµ±Ç°Ê±¶Î×î´óÀûÈó
+        if mod(t_cap, 900) == 1 % Ê±ï¿½Î³ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â³ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ä¹¦ï¿½Ê£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½Ç°Ê±ï¿½ï¿½Í¶ï¿½ï¿½
+            delta_t_rest = delta_t - mod(t_cap - 1, 1800) / 1800; % ï¿½ï¿½Ç°Ê±ï¿½ï¿½Ê£ï¿½ï¿½Ê±ï¿½ï¿½
+            maxProfit_t; % ï¿½ï¿½ï¿½ãµ±Ç°Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             lambda = sol.solveroutput.lambda.eqlin(1 : NOFEV);
-            minCostAllocation; % ¹¦ÂÊ·ÖÅä
+            minCostAllocation; % ï¿½ï¿½ï¿½Ê·ï¿½ï¿½ï¿½
         end
     end
 end
 
-% ×îºóÒ»¸öÊ±¶Î£¬²»ÓÃÔÙÍ¶±ê
+% ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ê±ï¿½Î£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¶ï¿½ï¿½
 for t_cap = (NOFSLOTS - 1) * 1800 + 1 : NOFSLOTS * 1800 - 1
-    if mod(t_cap, 900) == 1 % Ê±¶Î³õ»òÖÐ¼ä³õ£¬·ÖÅä¹¦ÂÊ
-        lambda = zeros(NOFEV, 1); % ±ÜÃâÊýÖµÎÊÌâ
-        minCostAllocation; % ¹¦ÂÊ·ÖÅä
+    if mod(t_cap, 900) == 1 % Ê±ï¿½Î³ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ä¹¦ï¿½ï¿½
+        lambda = zeros(NOFEV, 1); % ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½
+        minCostAllocation; % ï¿½ï¿½ï¿½Ê·ï¿½ï¿½ï¿½
     end
 end
 
 E_rev = [E_rev, E_cur];
 
-%% ÊÐ³¡ÊÕÒæ
+%% ï¿½Ð³ï¿½ï¿½ï¿½ï¿½ï¿½
 actualProfit = param.price_e .* actualEnergy + param.price_reg(:, 1) .* Bid_R_rev * param.s_perf + ...
     (param.price_reg(:, 2) .* actualMil) * param.s_perf;
- % ³ËÒÔÊ±¶Î³¤¶È
+ % ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Î³ï¿½ï¿½ï¿½
 actualProfit =  actualProfit * delta_t;
 
-save("../results/result_my_alloc.mat", "actualProfit", "actualCost", ...
+save(fullfile(root, "results", "result_my_alloc.mat"), "actualProfit", "actualCost", ...
     "Bid_P_rev", "Bid_R_rev", "Bid_P_init", "Bid_R_init", ...
     "actualEnergy", "actualMil", "P_alloc");

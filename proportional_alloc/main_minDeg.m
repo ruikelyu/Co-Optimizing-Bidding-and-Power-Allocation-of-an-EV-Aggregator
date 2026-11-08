@@ -1,9 +1,9 @@
 M = 1e3;
 % 准备数据
+root = fileparts(fileparts(mfilename("fullpath")));
+addpath(genpath(root));
 if ~ exist('param')
-    cd ../data_prepare
-    data_prepare_main;
-    cd ../proportional_alloc
+    run(fullfile(root, "data_prepare", "data_prepare_main.m"));
 end
 
 % 更新步长
@@ -52,7 +52,6 @@ E_rev = [E_rev, E_cur];
 %计算收益
 cal_profit;
 
-save("../results/result_minDeg.mat", "actualProfit","actualCost", ...
+save(fullfile(root, "results", "result_minDeg.mat"), "actualProfit","actualCost", ...
     "Bid_P_rev","Bid_R_rev","Bid_P_init","Bid_R_init", ...
     "actualEnergy","actualMil","P_alloc");
-

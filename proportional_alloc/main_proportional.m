@@ -1,12 +1,15 @@
-% ×¼±¸Êý¾Ý
+% ×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 M = 1e3;
+root = fileparts(fileparts(mfilename("fullpath")));
+addpath(genpath(root));
 if ~ exist('param')
-    cd ../data_prepare
-    data_prepare_main;
-    cd ../proportional_alloc
+    run(fullfile(root, "data_prepare", "data_prepare_main.m"));
+end
+if ~exist("SOLVER_NAME", "var")
+    SOLVER_NAME = 'cplex';
 end
 
-% ¸üÐÂ²½³¤
+% ï¿½ï¿½ï¿½Â²ï¿½ï¿½ï¿½
 NOFTCAP = 900;
 P_alloc = [];
 P_unbal = [];
@@ -14,15 +17,15 @@ actualMil = zeros(NOFSLOTS, 1);
 actualEnergy = zeros(NOFSLOTS, 1);
 actualCost = zeros(NOFSLOTS, 1);
 
-% ³õÊ¼Ê±¶Î
+% ï¿½ï¿½Ê¼Ê±ï¿½ï¿½
 warning('off')
 t_cap = 0;
 maxProfit_1;
 
-% ÖÐ¼äÊ±¶Î
+% ï¿½Ð¼ï¿½Ê±ï¿½ï¿½
 for t_cap = 1 : (NOFSLOTS - 1) * 1800
     
-    if mod(t_cap, 1800) == 0 % Ê±¶ÎÄ©Î²£¬¸üÐÂÏÂÒ»Ê±¶ÎÍ¶±ê£¬µ«³Ë×Ó²»¸üÐÂ
+    if mod(t_cap, 1800) == 0 % Ê±ï¿½ï¿½Ä©Î²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ê±ï¿½ï¿½Í¶ï¿½ê£¬ï¿½ï¿½ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½
         delta_t_rest = 0;
         maxProfit_t;
         Bid_P_cur = value(Bid_P(1, :));
@@ -32,26 +35,26 @@ for t_cap = 1 : (NOFSLOTS - 1) * 1800
         E_rev = [E_rev, E_cur];
         
     else
-        if mod(t_cap, 900) == 1 % Ê±¶Î³õ»òÖÐ¼ä³õ£¬¸üÐÂ³Ë×Ó²¢·ÖÅä¹¦ÂÊ£¬µ«²»¸üÐÂµ±Ç°Ê±¶ÎÍ¶±ê
-            delta_t_rest = delta_t - mod(t_cap - 1, 1800) / 1800;% µ±Ç°Ê±¶ÎÊ£ÓàÊ±¼ä
+        if mod(t_cap, 900) == 1 % Ê±ï¿½Î³ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â³ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ä¹¦ï¿½Ê£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½Ç°Ê±ï¿½ï¿½Í¶ï¿½ï¿½
+            delta_t_rest = delta_t - mod(t_cap - 1, 1800) / 1800;% ï¿½ï¿½Ç°Ê±ï¿½ï¿½Ê£ï¿½ï¿½Ê±ï¿½ï¿½
             maxProfit_t;
-            proportionalAllocation;% ¹¦ÂÊ·ÖÅä
+            proportionalAllocation;% ï¿½ï¿½ï¿½Ê·ï¿½ï¿½ï¿½
         end
     end
 end
 
-% ×îºóÒ»¸öÊ±¶Î£¬²»ÓÃÔÙÍ¶±ê
+% ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ê±ï¿½Î£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¶ï¿½ï¿½
 for t_cap = (NOFSLOTS - 1) * 1800 + 1 : NOFSLOTS * 1800 - 1
-    if mod(t_cap, 900) == 1 % Ê±¶Î³õ»òÖÐ¼ä³õ£¬·ÖÅä¹¦ÂÊ
-        proportionalAllocation;% ¹¦ÂÊ·ÖÅä
+    if mod(t_cap, 900) == 1 % Ê±ï¿½Î³ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ä¹¦ï¿½ï¿½
+        proportionalAllocation;% ï¿½ï¿½ï¿½Ê·ï¿½ï¿½ï¿½
     end
 end
 
 E_rev = [E_rev, E_cur];
 
-%¼ÆËãÊÕÒæ
+%ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 cal_profit;
 
-save("../results/result_proportional.mat", "actualProfit","actualCost", ...
+save(fullfile(root, "results", "result_proportional.mat"), "actualProfit","actualCost", ...
     "Bid_P_rev","Bid_R_rev","Bid_P_init","Bid_R_init", ...
     "actualEnergy","actualMil","P_alloc");
