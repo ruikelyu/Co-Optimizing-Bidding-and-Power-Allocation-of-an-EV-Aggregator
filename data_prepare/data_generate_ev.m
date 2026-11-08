@@ -1,24 +1,25 @@
-%% ´Óexcel¶ÁÈ¡EVµ½´ïÊ±¼ä£¬²¢ÉèÖÃµç³ØÏà¹ØµÄÆäËû²ÎÊý
+%% ï¿½ï¿½excelï¿½ï¿½È¡EVï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 % Read EV arrival time from Excel and set other parameters related to the battery
 
-filename = 'EV_arrive_leave.xlsx';
-sheet = 'EV_arrive_leave'; % ËùÔÚ±íµ¥ Specify the sheet
-xlRange = 'A2:C4013'; % ·¶Î§ Range
+root = fileparts(fileparts(mfilename("fullpath")));
+filename = fullfile(root, "data_prepare", "EV_arrive_leave.xlsx");
+sheet = 'EV_arrive_leave'; % ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ Specify the sheet
+xlRange = 'A2:C4013'; % ï¿½ï¿½Î§ Range
 
-EV_arrive_leave = xlsread(filename, sheet, xlRange); % EV±àºÅ£¬ ´ïµ½Ê±¶Î£¬ Àë¿ªÊ±¶Î EV number, arrival period, departure period
-% ¸Ä±ä³µÁ¾ÊýÁ¿ 4012 => 400£¬ÒòÎª²»ÐèÒªÄÇÃ´¶à
+EV_arrive_leave = xlsread(filename, sheet, xlRange); % EVï¿½ï¿½Å£ï¿½ ï¿½ïµ½Ê±ï¿½Î£ï¿½ ï¿½ë¿ªÊ±ï¿½ï¿½ EV number, arrival period, departure period
+% ï¿½Ä±ä³µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 4012 => 400ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½Ã´ï¿½ï¿½
 % Change the number of vehicles from 4012 to 400, as not all are needed
 EV_arrive_leave = EV_arrive_leave(1:10:end, :);
 
-% ¸Ä±äµ½´ïºÍÀë¿ªÊ±¼ä(µÚ¶þÁÐ)£¬ÒòÎªÔ­Ê¼Êý¾ÝÊÇ15minÁ£¶È£¬ÕâÀïÊÇÐ¡Ê±Á£¶È
+% ï¿½Ä±äµ½ï¿½ï¿½ï¿½ï¿½ë¿ªÊ±ï¿½ï¿½(ï¿½Ú¶ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½ï¿½ÎªÔ­Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½15minï¿½ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡Ê±ï¿½ï¿½ï¿½ï¿½
 % Change arrival and departure times (second column) from 15-minute granularity to hourly granularity
 col = 2;
 for i = 1:length(EV_arrive_leave)
     if EV_arrive_leave(i, col) ~= 1
-        EV_arrive_leave(i, col) = ceil(EV_arrive_leave(i, col) / 4) + 2; % µ½´ïÊ±¼ä£¬ÏòÉÏÈ¡Õû Arrival time: rounded up
+        EV_arrive_leave(i, col) = ceil(EV_arrive_leave(i, col) / 4) + 2; % ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ Arrival time: rounded up
     end
     if EV_arrive_leave(i, col + 1) < 57
-        EV_arrive_leave(i, col + 1) = floor((EV_arrive_leave(i, col + 1)) / 4) + 1; %Àë¿ªÊ±¼ä£ºÏòÏÂÈ¡Õû Departure time: rounded down
+        EV_arrive_leave(i, col + 1) = floor((EV_arrive_leave(i, col + 1)) / 4) + 1; %ï¿½ë¿ªÊ±ï¿½ä£ºï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ Departure time: rounded down
     end
     if EV_arrive_leave(i, col + 1) == 57
         EV_arrive_leave(i, col + 1) = 16;

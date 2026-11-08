@@ -79,7 +79,10 @@ Constraints = [Constraints, repmat(param.E_min, 1, NOFTCAP + 1) <= E_cap];
 Constraints = [Constraints, E_cap <= repmat(param.E_max, 1, NOFTCAP + 1)];
 
 %% slove
-ops = sdpsettings('debug',1,'solver','cplex','savesolveroutput',1,'savesolverinput',1);
+if ~exist("SOLVER_NAME", "var")
+    SOLVER_NAME = 'cplex';
+end
+ops = sdpsettings('debug',1,'solver',SOLVER_NAME,'savesolveroutput',1,'savesolverinput',1);
 
 sol = optimize(Constraints, Cost_s, ops);
 
@@ -92,6 +95,4 @@ end
 %% 记录结果+更新电量
 
 cal_allocation;
-
-
 

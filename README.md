@@ -38,25 +38,58 @@ In the `co-optimizing_bid_power-allocation` folder, you can find the following m
 
 These testing sections offer a basic demo that can be run once you have set up the environment.
 
+### Quick Start
+
+Install MATLAB R2024b or newer, [YALMIP](https://yalmip.github.io/), and
+either CPLEX or Gurobi with its MATLAB/YALMIP interface and a valid license.
+Then run the following from any MATLAB current folder:
+
+```matlab
+cd('path/to/Co-Optimizing-Bidding-and-Power-Allocation-of-an-EV-Aggregator')
+setup_project
+check_installation
+result = run_demo;
+```
+
+The default solver is selected automatically, preferring Gurobi and then
+CPLEX. To select one explicitly:
+
+```matlab
+result = run_demo("Solver", "gurobi");
+% or
+result = run_demo("Solver", "cplex");
+```
+
+The simulation processes a full 16-hour horizon and may take a substantial
+amount of time. Results are saved under `results/`. `run_demo` returns the
+main result arrays in a MATLAB structure.
+
 ### 如何使用
 
-1. 克隆或下载本仓库到您的本地环境。
-2. 安装 MATLAB、YALMIP 和 CPLEX 或 Gurobi。
-3. 在 `co-optimizing_bid_power-allocation` 文件夹中运行相应的测试部分以了解代码功能和思路。
+安装 MATLAB R2024b 或更高版本、YALMIP，以及 CPLEX 或 Gurobi（含 MATLAB/YALMIP
+接口和有效许可证），然后运行：
+
+```matlab
+cd('path/to/Co-Optimizing-Bidding-and-Power-Allocation-of-an-EV-Aggregator')
+setup_project
+check_installation
+result = run_demo;
+```
 
 ### How to Use
 
-1. Clone or download this repository to your local environment.
-2. Install MATLAB, YALMIP, and CPLEX or Gurobi.
-3. Run the relevant testing sections in the `co-optimizing_bid_power-allocation` folder to understand the code functionality and approach.
+The legacy scripts remain available under `co-optimizing_bid_power-allocation`
+and `proportional_alloc`. The wrappers above configure paths and select the
+available solver automatically, so users do not need to edit scripts or change
+folders manually.
 
 ### 说明文档
 
 **开始之前:**
 
-为了运行程序，您需要安装 MATLAB + YALMIP + CPLEX。
-在 `co-optimizing_bid_power-allocation` 文件夹中运行 `main` 即可获得最基础的结果。
-如果 MATLAB 版本过高可能导致崩溃，您需要使用 Gurobi。请将以下代码修改为：
+为了运行程序，您需要安装 MATLAB + YALMIP + CPLEX 或 Gurobi。
+推荐使用仓库根目录中的 `setup_project`、`check_installation` 和 `run_demo`。
+旧版代码默认使用 CPLEX；包装器会自动选择可用的求解器，因此通常不需要手动修改：
 ```matlab
 ops = sdpsettings('debug',0,'solver','cplex','savesolveroutput',1,'savesolverinput',1);
 ```
@@ -93,9 +126,11 @@ ops = sdpsettings('debug',0,'solver','gurobi','savesolveroutput',1,'savesolverin
 
 Before getting started:
 
-To run the program, you need MATLAB + YALMIP + CPLEX.
-Run `main` in `co-optimizing_bid_power-allocation` to obtain the most basic results.
-If the MATLAB version is too high and may cause crashes, you need to use Gurobi. Change:
+To run the program, you need MATLAB + YALMIP + CPLEX or Gurobi.
+Run `setup_project`, `check_installation`, and `run_demo` from the repository
+root to configure the path, verify dependencies, and run the main example.
+The wrapper automatically prefers Gurobi and falls back to CPLEX. The legacy
+scripts can still be run directly. If you need to select Gurobi manually, change:
 ```matlab
 ops = sdpsettings('debug',0,'solver','cplex','savesolveroutput',1,'savesolverinput',1);
 ```

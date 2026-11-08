@@ -1,13 +1,15 @@
-%% ×¼±¸ÎÊÌâ²ÎÊý(°üÀ¨EV²ÎÊý¡¢ÊÐ³¡¼Û¸ñ¡¢RegDÐÅºÅ£©
+%% ×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½EVï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð³ï¿½ï¿½Û¸ï¿½RegDï¿½ÅºÅ£ï¿½
 param = {}; % Initialize the parameter structure
+root = fileparts(fileparts(mfilename("fullpath")));
+addpath(fullfile(root, "data_prepare"));
 
 %
 
-%% ¶ÁÈ¡RegDÐÅºÅÊý¾Ý
-% Ê±¶ÎÊýÁ¿£¬24Ð¡Ê±¡£µ«ÎÒÃÇÖ»È¡16¸öÐ¡Ê±¡£
+%% ï¿½ï¿½È¡RegDï¿½Åºï¿½ï¿½ï¿½ï¿½ï¿½
+% Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½24Ð¡Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»È¡16ï¿½ï¿½Ð¡Ê±ï¿½ï¿½
 NOFSLOTS = 16;
 
-% Ñ¡ÔñÈÕÆÚÎª7ÔÂ17ÈÕ-18ÈÕ
+% Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª7ï¿½ï¿½17ï¿½ï¿½-18ï¿½ï¿½
 if ~exist('day_price')
     day_price = 27; % Corresponding price: May 20th
     day_reg = day_price; % Frequency regulation signal: July 17th, 2020
@@ -15,59 +17,59 @@ end
 
 hour_init = 18; % Starting from 18:00-19:00 (the original 19th slot)
 
-% ´Óexcel¶ÁÈ¡RegDÐÅºÅÊý¾Ý
-filename = '07 2020.xlsx';
+% ï¿½ï¿½excelï¿½ï¿½È¡RegDï¿½Åºï¿½ï¿½ï¿½ï¿½ï¿½
+filename = fullfile(root, "data_prepare", "07 2020.xlsx");
 sheet = 'Dynamic'; % Specify the sheet
 xlRange = 'B2:AF43202'; % Range
 
-% ¶ÁÈ¡7ÔÂ·ÝËùÓÐÐÅºÅÊý¾Ý£¬2sÒ»¸öµã * 31d
+% ï¿½ï¿½È¡7ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åºï¿½ï¿½ï¿½ï¿½Ý£ï¿½2sÒ»ï¿½ï¿½ï¿½ï¿½ * 31d
 Signals = xlsread(filename, sheet, xlRange);
 
-% Êý¾ÝÇåÀí£¬ÅÅ³ý³¬³ö¡¾-1£¬ 1¡¿µÄÊý¾Ý
+% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½-1ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 Signals(Signals < -1) = -1;
 Signals(Signals > 1) = 1;
 
-% ´¦ÀíRegDÊý¾Ý£¬¸ø³öÆäÖðÐ¡Ê±µÄ·Ö²¼
+% ï¿½ï¿½ï¿½ï¿½RegDï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡Ê±ï¿½Ä·Ö²ï¿½
 data_handle_regd;
 
-%% EV²ÎÊý
-% ¶ÁÈ¡EVµ½´ïÊý¾Ý
+%% EVï¿½ï¿½ï¿½ï¿½
+% ï¿½ï¿½È¡EVï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 data_generate_ev;
 
 param.EV_arrive_leave = EV_arrive_leave;
 
-% EVÊýÁ¿
+% EVï¿½ï¿½ï¿½ï¿½
 NOFEV = length(param.EV_arrive_leave);
-% ³¡¾°ÊýÁ¿
+% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 NOFSCEN = length(param.hourly_Distribution(1, :));
 
-% µ÷ÆµÐÔÄÜ
-param.s_perf = 0.984;% ²Î¿¼PJM½Ì³ÌÉè¶¨µÄ¹Ì¶¨Öµ
-% ×î´ó¹¦ÂÊ(kW)£¬ÈÝÁ¿ÉÏÏÂÏÞ(kWh)
+% ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½
+param.s_perf = 0.984;% ï¿½Î¿ï¿½PJMï¿½Ì³ï¿½ï¿½è¶¨ï¿½Ä¹Ì¶ï¿½Öµ
+% ï¿½ï¿½ï¿½ï¿½ï¿½(kW)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(kWh)
 param.P_max = 7.68;
 
 for idx = 1 : NOFEV
     switch mod(idx, 3)
         case 1
-            % ³ä·ÅµçÐ§ÂÊ
+            % ï¿½ï¿½Åµï¿½Ð§ï¿½ï¿½
             param.eta(idx) = 0.95;
-            % ×î´ó¹¦ÂÊ(kW)£¬ÈÝÁ¿ÉÏÏÂÏÞ(kWh)
+            % ï¿½ï¿½ï¿½ï¿½ï¿½(kW)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(kWh)
             param.E_max(idx) = 90;
-            % ·ÅµçÀÏ»¯³É±¾($/kWh)
+            % ï¿½Åµï¿½ï¿½Ï»ï¿½ï¿½É±ï¿½($/kWh)
             param.Pr_deg(idx) = 0.1;
         case 2
-            % ³ä·ÅµçÐ§ÂÊ
+            % ï¿½ï¿½Åµï¿½Ð§ï¿½ï¿½
             param.eta(idx) = 0.92;
-            % ×î´ó¹¦ÂÊ(kW)£¬ÈÝÁ¿ÉÏÏÂÏÞ(kWh)
+            % ï¿½ï¿½ï¿½ï¿½ï¿½(kW)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(kWh)
             param.E_max(idx) = 60;
-            % ·ÅµçÀÏ»¯³É±¾($/kWh)
+            % ï¿½Åµï¿½ï¿½Ï»ï¿½ï¿½É±ï¿½($/kWh)
             param.Pr_deg(idx) = 0.15;
         case 0
-            % ³ä·ÅµçÐ§ÂÊ
+            % ï¿½ï¿½Åµï¿½Ð§ï¿½ï¿½
             param.eta(idx) = 0.90;
-            % ×î´ó¹¦ÂÊ(kW)£¬ÈÝÁ¿ÉÏÏÂÏÞ(kWh)
+            % ï¿½ï¿½ï¿½ï¿½ï¿½(kW)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(kWh)
             param.E_max(idx) = 36;
-            % ·ÅµçÀÏ»¯³É±¾($/kWh)
+            % ï¿½Åµï¿½ï¿½Ï»ï¿½ï¿½É±ï¿½($/kWh)
             param.Pr_deg(idx) = 0.2;
     end
 end
@@ -78,7 +80,7 @@ param.E_0 = param.E_max / 3;
 param.E_min = param.E_max / 6;
 param.E_leave = param.E_max * 0.9;
 
-% ²åµç×´Ì¬ u
+% ï¿½ï¿½ï¿½×´Ì¬ u
 u = zeros(NOFEV, NOFSLOTS);
 for idx = 1 : NOFEV
     for jdx = 1 : NOFSLOTS
@@ -90,19 +92,19 @@ end
 param.u = u;
 clear u;
 
-%% ÊÐ³¡¼Û¸ñºÍÆäËû²ÎÊý
-% Ê±¶Î³¤¶È£¬1Ð¡Ê±
+%% ï¿½Ð³ï¿½ï¿½Û¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+% Ê±ï¿½Î³ï¿½ï¿½È£ï¿½1Ð¡Ê±
 delta_t = 1;
 
-% ¶ÁÈ¡µ÷ÆµÊÐ³¡¼Û¸ñÊý¾Ý
-filename = 'regulation_market_results.xlsx';
+% ï¿½ï¿½È¡ï¿½ï¿½Æµï¿½Ð³ï¿½ï¿½Û¸ï¿½ï¿½ï¿½ï¿½ï¿½
+filename = fullfile(root, "data_prepare", "regulation_market_results.xlsx");
 sheet = 'regulation_market_results'; % Specify the sheet
 start_row = (day_price-1) * 24 + hour_init + 2; % Starting row
 xlRange = "G" + start_row + ":H" + (start_row + NOFSLOTS - 1); % Range
 param.price_reg = xlsread(filename, sheet, xlRange); % Capacity price, mileage price
 
-% ¶ÁÈ¡ÏµÍ³ÄÜÁ¿¼Û¸ñÊý¾Ý
-filename = 'rt_hrl_lmps.xlsx';
+% ï¿½ï¿½È¡ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½Û¸ï¿½ï¿½ï¿½ï¿½ï¿½
+filename = fullfile(root, "data_prepare", "rt_hrl_lmps.xlsx");
 sheet = 'rt_hrl_lmps'; % Specify the sheet
 xlRange = "I" + start_row + ":I" + (start_row + NOFSLOTS - 1); % Range
 param.price_e = xlsread(filename, sheet, xlRange); % Capacity price, mileage price

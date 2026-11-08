@@ -1,126 +1,129 @@
-%% ¼ÆËãÏÂÒ»Ê±¶ÎÍ¶±êÎÊÌâÖÐ£¬µç³ØµçÁ¿µÄÓ°×Ó¼Û¸ñ£¬ÓÃÓÚµ±Ç°Ê±¶Î½øÐÐ·ÖÅä
+%% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ê±ï¿½ï¿½Í¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½Ó°ï¿½Ó¼Û¸ï¿½ï¿½ï¿½ï¿½Úµï¿½Ç°Ê±ï¿½Î½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½
 
-% ÏÖÓÐÎÄÏ×µÄ×ö·¨£¬¼´°´ÕÕ±ÈÀý·ÖÅäµ÷ÆµÐÅºÅ
+% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×µï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½Åºï¿½
 
-% ÊäÈë£º¸÷Ê±¶ÎÄÜÁ¿¡¢µ÷ÆµÊÐ³¡¼Û¸ñ£»µç¶¯Æû³µµ½´ï¡¢Àë¿ªµÄÊ±¶Î¡¢µçÁ¿£»µ±Ç°Ê±¶ÎÊ±¿Ìt_cap; µ±Ç°Ê±¶ÎµÄÍ¶±êÁ¿
-% ÊäÈë£ºµ±Ç°¸÷µç³ØµçÁ¿£»
-% ³õÖµ£º ÉÏÒ»Ê±¶ÎÍ¶±êÊ±£¬¸÷Ê±¶ÎµÄÍ¶±êÁ¿¡£
-% Êä³ö:  Î´À´¸÷Ê±¶ÎÍ¶±êÁ¿¡¢µç³ØµçÁ¿¡£Î´À´Ò»¸öÊ±¶ÎL³Ë×Ó
+% ï¿½ï¿½ï¿½ë£ºï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½Ð³ï¿½ï¿½Û¸ñ£»µç¶¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¡¢ï¿½ë¿ªï¿½ï¿½Ê±ï¿½Î¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°Ê±ï¿½ï¿½Ê±ï¿½ï¿½t_cap; ï¿½ï¿½Ç°Ê±ï¿½Îµï¿½Í¶ï¿½ï¿½ï¿½ï¿½
+% ï¿½ï¿½ï¿½ë£ºï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½
+% ï¿½ï¿½Öµï¿½ï¿½ ï¿½ï¿½Ò»Ê±ï¿½ï¿½Í¶ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Îµï¿½Í¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+% ï¿½ï¿½ï¿½:  Î´ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Í¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½Ò»ï¿½ï¿½Ê±ï¿½ï¿½Lï¿½ï¿½ï¿½ï¿½
 
 
-%% ²ÎÊýÉè¶¨
+%% ï¿½ï¿½ï¿½ï¿½ï¿½è¶¨
 
-% ¸ü¶à£º¼û data_prepare.m
+% ï¿½ï¿½ï¿½à£ºï¿½ï¿½ data_prepare.m
 
-% µ±Ç°Ê±¶Î±àºÅ CUR_SLOT
-CUR_SLOT = ceil(t_cap / 1800);% 2sÒ»¸ö£¬³ýÒÔ1800ÏòÉÏÈ¡Õû£¬Îªµ±Ç°Ê±¶Î±àºÅ
-% Ê£ÏÂÊ±¶ÎÊýÁ¿
+% ï¿½ï¿½Ç°Ê±ï¿½Î±ï¿½ï¿½ CUR_SLOT
+CUR_SLOT = ceil(t_cap / 1800);% 2sÒ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1800ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½Ç°Ê±ï¿½Î±ï¿½ï¿½
+% Ê£ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 REST_SLOTS = NOFSLOTS - CUR_SLOT;
 
-%% ±äÁ¿
-% Í¶±êÈÝÁ¿£ºÄÜÁ¿¡¢µ÷Æµ(MW), ´Ót + 1µ½T, ÆäÖÐt + 1ÎªµÚÒ»¸öentry
+%% ï¿½ï¿½ï¿½ï¿½
+% Í¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµ(MW), ï¿½ï¿½t + 1ï¿½ï¿½T, ï¿½ï¿½ï¿½ï¿½t + 1Îªï¿½ï¿½Ò»ï¿½ï¿½entry
 Bid_P = sdpvar(REST_SLOTS, NOFEV, 'full'); 
 Bid_R = sdpvar(REST_SLOTS, NOFEV, 'full'); 
 
-% ¸¨Öú±äÁ¿
-P_dis = sdpvar(NOFEV, REST_SLOTS + 1, NOFSCEN, 'full'); % EVÔÚ¸÷³¡¾°·Åµç¹¦ÂÊ(kW),µ±Ç°Ê±¶ÎÊ£ÏÂÊ±¼äÈÔÈ»Òª·ÖÅä£¬Òò´Ë¶àÒ»¸öÊ±¶ÎÎ¬¶È
-P_ch = sdpvar(NOFEV, REST_SLOTS + 1, NOFSCEN, 'full'); % EVÔÚ¸÷³¡¾°³äµç¹¦ÂÊ(kW),µ±Ç°Ê±¶ÎÊ£ÏÂÊ±¼äÈÔÈ»Òª·ÖÅä£¬Òò´Ë¶àÒ»¸öÊ±¶ÎÎ¬¶È
-E = sdpvar(NOFEV, REST_SLOTS + 2, 'full'); % EVÔÚ¸÷Ê±¶ÎÖ®³õµÄµç³ØÄÜÁ¿(kWh)¡£°üÀ¨µ±Ç°Ê±¿Ì¡¢Àë¿ªÊ±¿Ì£¬Òò´Ë¶à2¸öÎ¬¶È
-Cost_deg = sdpvar(REST_SLOTS + 1, NOFSCEN, 'full');% Î´À´¸÷Ê±¶Î¸÷³¡¾°µÄÐÔÄÜ³É±¾($/h)
-delta_P_dis = sdpvar(NOFEV, 1, NOFSCEN, 'full'); % Æ«²î¹¦ÂÊ(kW)
-delta_P_ch = sdpvar(NOFEV, 1, NOFSCEN, 'full'); % Æ«²î¹¦ÂÊ(kW)
+% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+P_dis = sdpvar(NOFEV, REST_SLOTS + 1, NOFSCEN, 'full'); % EVï¿½Ú¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åµç¹¦ï¿½ï¿½(kW),ï¿½ï¿½Ç°Ê±ï¿½ï¿½Ê£ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½È»Òªï¿½ï¿½ï¿½ä£¬ï¿½ï¿½Ë¶ï¿½Ò»ï¿½ï¿½Ê±ï¿½ï¿½Î¬ï¿½ï¿½
+P_ch = sdpvar(NOFEV, REST_SLOTS + 1, NOFSCEN, 'full'); % EVï¿½Ú¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç¹¦ï¿½ï¿½(kW),ï¿½ï¿½Ç°Ê±ï¿½ï¿½Ê£ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½È»Òªï¿½ï¿½ï¿½ä£¬ï¿½ï¿½Ë¶ï¿½Ò»ï¿½ï¿½Ê±ï¿½ï¿½Î¬ï¿½ï¿½
+E = sdpvar(NOFEV, REST_SLOTS + 2, 'full'); % EVï¿½Ú¸ï¿½Ê±ï¿½ï¿½Ö®ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(kWh)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°Ê±ï¿½Ì¡ï¿½ï¿½ë¿ªÊ±ï¿½Ì£ï¿½ï¿½ï¿½Ë¶ï¿½2ï¿½ï¿½Î¬ï¿½ï¿½
+Cost_deg = sdpvar(REST_SLOTS + 1, NOFSCEN, 'full');% Î´ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Î¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü³É±ï¿½($/h)
+delta_P_dis = sdpvar(NOFEV, 1, NOFSCEN, 'full'); % Æ«ï¿½î¹¦ï¿½ï¿½(kW)
+delta_P_ch = sdpvar(NOFEV, 1, NOFSCEN, 'full'); % Æ«ï¿½î¹¦ï¿½ï¿½(kW)
 
-%% Ä¿±êº¯Êý
-% ÄÜÁ¿ÊÕÒæ¡¢µ÷ÆµÈÝÁ¿ÊÕÒæ¡¢µ÷ÆµÀï³ÌÊÕÒæ¡¢²¿Êð³É±¾¡¢ÐÔÄÜ³É±¾
+%% Ä¿ï¿½êº¯ï¿½ï¿½
+% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ¡¢ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ¡¢ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ¡¢ï¿½ï¿½ï¿½ï¿½É±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü³É±ï¿½
 Profit = sum(param.price_e(CUR_SLOT + 1 : end)' * Bid_P + param.price_reg(CUR_SLOT + 1 : end, 1)' * Bid_R * param.s_perf + ...
     (param.price_reg(CUR_SLOT + 1 : end, 2) .* param.hourly_Mileage(CUR_SLOT + 1 : end))' * Bid_R * param.s_perf + ...
      ((param.hourly_Distribution(CUR_SLOT + 1 : end, :) * param.d_s) .* param.price_e(CUR_SLOT + 1 : end))' * Bid_R) - ...
      sum(sum(param.hourly_Distribution(CUR_SLOT + 1 : end, :) .* Cost_deg(2 : end, :)));
  
-% ³ËÒÔÊ±¶Î³¤¶È
+% ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Î³ï¿½ï¿½ï¿½
 Profit = Profit * delta_t;
 
-%²¹ÉÏµ±Ç°Ê±¶ÎµÄ³É±¾
+%ï¿½ï¿½ï¿½Ïµï¿½Ç°Ê±ï¿½ÎµÄ³É±ï¿½
 Profit = Profit - sum(((param.hourly_Distribution(CUR_SLOT, :) * param.d_s) .* param.price_e(CUR_SLOT))' * Bid_R_cur * delta_t_rest) - ...
      sum(sum(param.hourly_Distribution(CUR_SLOT, :) .* Cost_deg(1, :))) * delta_t_rest;
 
 
 
-%% Ô¼ÊøÌõ¼þ
+%% Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 Constraints = [];
 
-% µ±Ç°µçÁ¿£¬ÓÉ´ËÍÆ³öL³Ë×Ó
+% ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É´ï¿½ï¿½Æ³ï¿½Lï¿½ï¿½ï¿½ï¿½
 Constraints = [Constraints, E_cur - E(:, 1) == 0];
 
-% µ÷ÆµÈÝÁ¿·Ç¸º¡£ NOFSLOTS
+% ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½ NOFSLOTS
 Constraints = [Constraints, 0 <= Bid_R];
 
-% ¹¦ÂÊÏìÓ¦-¸÷³¡¾°Æ½ºâ¡£ NOFEV * REST_SLOTS + 1 * NOFSCEN
+% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ½ï¿½â¡£ NOFEV * REST_SLOTS + 1 * NOFSCEN
 temp = repmat(param.d_s', REST_SLOTS + 1, 1, NOFEV);
 temp = permute(temp, [3, 1, 2]);
 
 Constraints = [Constraints, 1e3 * repmat(Bid_P', 1, 1, NOFSCEN) + ...
     1e3 * repmat(Bid_R', 1, 1, NOFSCEN) .* temp(:, 2 : end, :) - (P_dis(:, 2 : end, :) - P_ch(:, 2 : end, :)) == 0];
 Constraints = [Constraints, 1e3 * repmat(Bid_P_cur', 1, 1, NOFSCEN) + ...
-    1e3 * repmat(Bid_R_cur', 1, 1, NOFSCEN) .* temp(:, 1, :) - (delta_P_dis - delta_P_ch + P_dis(:, 1, :) - P_ch(:, 1, :)) == 0];% µ±Ç°Ê±¶Î
+    1e3 * repmat(Bid_R_cur', 1, 1, NOFSCEN) .* temp(:, 1, :) - (delta_P_dis - delta_P_ch + P_dis(:, 1, :) - P_ch(:, 1, :)) == 0];% ï¿½ï¿½Ç°Ê±ï¿½ï¿½
 
-% ¹¦ÂÊÉÏÏÂÏÞ(kW)¡£ NOFEV * NOFSLOTS * NOFSCEN
+% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(kW)ï¿½ï¿½ NOFEV * NOFSLOTS * NOFSCEN
 Constraints = [Constraints, 0 <= P_dis];
 Constraints = [Constraints, 0 <= P_ch];
 Constraints = [Constraints, P_dis(:, 2 : end, :) <= repmat(param.u(:, CUR_SLOT+1 : end), 1, 1, NOFSCEN) * param.P_max];
 Constraints = [Constraints, P_ch(:, 2 : end, :) <= repmat(param.u(:, CUR_SLOT+1 : end), 1, 1, NOFSCEN) * param.P_max];
-Constraints = [Constraints, P_dis(:, 1, :) <= (1 + 1e-5) * repmat(param.u(:, CUR_SLOT), 1, 1, NOFSCEN) * param.P_max];% ±ÜÃâÊýÖµÎÊÌâ
+Constraints = [Constraints, P_dis(:, 1, :) <= (1 + 1e-5) * repmat(param.u(:, CUR_SLOT), 1, 1, NOFSCEN) * param.P_max];% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½
 Constraints = [Constraints, P_ch(:, 1, :) <= (1 + 1e-5) * repmat(param.u(:, CUR_SLOT), 1, 1, NOFSCEN) * param.P_max];
 
 Constraints = [Constraints, 0 <= delta_P_dis];
 Constraints = [Constraints, 0 <= delta_P_ch];
 
-%  ·ÅµçÀÏ»¯($/h) .REST_SLOTS + 1 * NOFSCEN
-temp = permute(sum(repmat(param.Pr_deg, 1, REST_SLOTS + 1, NOFSCEN) .* P_dis), [2, 3, 1]);% °ÑEVµÄ¹¦ÂÊ¾ÛºÏ, ½»»»ÐÐÁÐ 
+%  ï¿½Åµï¿½ï¿½Ï»ï¿½($/h) .REST_SLOTS + 1 * NOFSCEN
+temp = permute(sum(repmat(param.Pr_deg, 1, REST_SLOTS + 1, NOFSCEN) .* P_dis), [2, 3, 1]);% ï¿½ï¿½EVï¿½Ä¹ï¿½ï¿½Ê¾Ûºï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 temp = reshape(temp, REST_SLOTS + 1, NOFSCEN);
 
 Constraints = [Constraints, Cost_deg == temp];
 
-% Ê±¶Î¼äÄÜÁ¿¹ØÁª(kWh)
+% Ê±ï¿½Î¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(kWh)
 
-% Àë¿ªÊ±ÖÁÉÙÎª90%µÄµçÁ¿£¨µÚÎåÁÐ£© NOFEV
+% ï¿½ë¿ªÊ±ï¿½ï¿½ï¿½ï¿½Îª90%ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ NOFEV
 Constraints = [Constraints, E(:, end) >= param.E_leave];
 
-% ÖÐ¼äÊ±¶ÎµÄÄÜÁ¿ÔÚ10~60Ö®¼ä NOFEV * REST_SLOTS+2
+% ï¿½Ð¼ï¿½Ê±ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½10~60Ö®ï¿½ï¿½ NOFEV * REST_SLOTS+2
 Constraints = [Constraints, repmat(param.E_min, 1, REST_SLOTS + 2) <= E];
 Constraints = [Constraints, E <= repmat(param.E_max, 1, REST_SLOTS + 2)];
 
-% µ÷ÆµÍ¶±êµÄÁ¬Ðø³öÁ¦Ô¼Êø REST_SLOTS, ´Ót+1£¨2£©¿ªÊ¼
+% ï¿½ï¿½ÆµÍ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ REST_SLOTS, ï¿½ï¿½t+1ï¿½ï¿½2ï¿½ï¿½ï¿½ï¿½Ê¼
 Constraints = [Constraints, repmat(param.eta, 1, REST_SLOTS) .* (E(:, 2 : end-1) - repmat(param.E_min, 1, REST_SLOTS)) ...
     >= 1e3 * Bid_R' * 0.25 * delta_t + 1e3 * Bid_P' * delta_t];
 Constraints = [Constraints, repmat(1 ./ param.eta, 1, REST_SLOTS) .* (- E(:, 2 : end-1) + repmat(param.E_max, 1, REST_SLOTS)) ...
     >= 1e3 * Bid_R' * 0.25 * delta_t - 1e3 * Bid_P' * delta_t];
 
-% Ç°ºóÊ±¶ÎÏÎ½Ó NOFEV * REST_SLOTS+1
+% Ç°ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Î½ï¿½ NOFEV * REST_SLOTS+1
 temp = P_ch .* repmat(param.eta, 1, REST_SLOTS + 1, NOFSCEN) - ...
     P_dis .* repmat(1 ./ param.eta, 1, REST_SLOTS + 1, NOFSCEN);
-temp = permute(temp, [3, 2, 1]);% ½»»»ÐÐÁÐ
-temp = reshape(temp, NOFSCEN, (REST_SLOTS + 1) * NOFEV);% ¹¦ÂÊÆÌÆ½Îª SCEN * (SLOTS * EV)
-temp2 = repmat(param.hourly_Distribution(CUR_SLOT : end, :)', 1, NOFEV);% ·Ö²¼ÖØ¸´Îª SCEN * (SLOTS+1 * EV)
-temp = sum(temp .* temp2);% Ïà³Ë£¬²¢°´¸ÅÂÊ¼ÓÈ¨Ïà¼Ó
-temp = reshape(temp, REST_SLOTS + 1, NOFEV)';% ÖØÐÂÐ´Îª SLOTS+1 * EV,²¢×ªÖÃÎªEV * SLOTS+1
+temp = permute(temp, [3, 2, 1]);% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+temp = reshape(temp, NOFSCEN, (REST_SLOTS + 1) * NOFEV);% ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ½Îª SCEN * (SLOTS * EV)
+temp2 = repmat(param.hourly_Distribution(CUR_SLOT : end, :)', 1, NOFEV);% ï¿½Ö²ï¿½ï¿½Ø¸ï¿½Îª SCEN * (SLOTS+1 * EV)
+temp = sum(temp .* temp2);% ï¿½ï¿½Ë£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½È¨ï¿½ï¿½ï¿½
+temp = reshape(temp, REST_SLOTS + 1, NOFEV)';% ï¿½ï¿½ï¿½ï¿½Ð´Îª SLOTS+1 * EV,ï¿½ï¿½×ªï¿½ï¿½ÎªEV * SLOTS+1
 
-Constraints = [Constraints, E(:, 3 : end) == E(:, 2 : end - 1) + temp(:, 2 : end) * delta_t];% Î´À´Ê±¶Î
-Constraints = [Constraints, E(:, 2) == E(:, 1) + temp(:, 1) * delta_t_rest];% Î´À´Ò»¸öÊ±¶Î
+Constraints = [Constraints, E(:, 3 : end) == E(:, 2 : end - 1) + temp(:, 2 : end) * delta_t];% Î´ï¿½ï¿½Ê±ï¿½ï¿½
+Constraints = [Constraints, E(:, 2) == E(:, 1) + temp(:, 1) * delta_t_rest];% Î´ï¿½ï¿½Ò»ï¿½ï¿½Ê±ï¿½ï¿½
 
 
-%% Çó½âsolve
-ops = sdpsettings('debug',1,'solver','cplex','savesolveroutput',1,'savesolverinput',1);
+%% ï¿½ï¿½ï¿½solve
+if ~exist("SOLVER_NAME", "var")
+    SOLVER_NAME = 'cplex';
+end
+ops = sdpsettings('debug',1,'solver',SOLVER_NAME,'savesolveroutput',1,'savesolverinput',1);
 
-% ¹¦ÂÊ²»Æ½ºâ³Í·£
+% ï¿½ï¿½ï¿½Ê²ï¿½Æ½ï¿½ï¿½Í·ï¿½
 % M = 1e3;
 Cost_s = M * sum(sum(delta_P_dis +  delta_P_ch));
 
 sol = optimize(Constraints, - Profit + Cost_s, ops);
 
-if sol.problem == 0 || sol.problem == 4% Çó½â³É¹¦
-    disp(" Ê±¶Î" + (CUR_SLOT+1) + " :Í¶±êÍê³É¡£")
+if sol.problem == 0 || sol.problem == 4% ï¿½ï¿½ï¿½É¹ï¿½
+    disp(" Ê±ï¿½ï¿½" + (CUR_SLOT+1) + " :Í¶ï¿½ï¿½ï¿½ï¿½É¡ï¿½")
 else
-    disp("Ê±¶Î" + (CUR_SLOT+1) + " :Í¶±êÓÅ»¯Ê§°Ü¡£")
+    disp("Ê±ï¿½ï¿½" + (CUR_SLOT+1) + " :Í¶ï¿½ï¿½ï¿½Å»ï¿½Ê§ï¿½Ü¡ï¿½")
 end
